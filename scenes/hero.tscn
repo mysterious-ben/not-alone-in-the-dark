@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://d10wld20ubael"]
+
+[ext_resource type="Texture2D" uid="uid://tk2rrpxha4t1" path="res://assets/sprites/hero.png" id="1_3uyx6"]
+[ext_resource type="Script" uid="uid://brdchafxtp36" path="res://scripts/hero.gd" id="1_yvbpl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6xj2"]
+size = Vector2(3, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5qna"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvbpl"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2sko"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06baw"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mo806"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mv13s"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7pyx"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n40cg"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txblw"]
+atlas = ExtResource("1_3uyx6")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ruvm8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5qna")
+}],
+"loop": 1,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvbpl")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2sko")
+}],
+"loop": 1,
+"name": &"idle_flashlight",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06baw")
+}],
+"loop": 1,
+"name": &"turn",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mo806")
+}],
+"loop": 1,
+"name": &"turn_flashlight",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mv13s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7pyx")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n40cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txblw")
+}],
+"loop": 1,
+"name": &"walk_flashlight",
+"speed": 3.0
+}]
+
+[node name="Hero" type="CharacterBody2D" unique_id=1137355183]
+script = ExtResource("1_yvbpl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2083197558]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_d6xj2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1331173723]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_ruvm8")
+animation = &"idle_flashlight"
+autoplay = "idle_flashlight"
