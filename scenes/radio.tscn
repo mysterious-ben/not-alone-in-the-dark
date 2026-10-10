@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://jeydxaeeb84h"]
+
+[ext_resource type="Texture2D" uid="uid://ee6g58cxldw0" path="res://assets/sprites/radio_v2.png" id="1_y83x7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldjbc"]
+atlas = ExtResource("1_y83x7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h80l"]
+atlas = ExtResource("1_y83x7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b7o3"]
+atlas = ExtResource("1_y83x7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ruvm8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldjbc")
+}],
+"loop": 1,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h80l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b7o3")
+}],
+"loop": 1,
+"name": &"on",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruvm8"]
+size = Vector2(5, 3)
+
+[node name="Radio" type="AnimatableBody2D" unique_id=1064159528]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=99641837]
+sprite_frames = SubResource("SpriteFrames_ruvm8")
+animation = &"on"
+autoplay = "off"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=151651963]
+position = Vector2(0.5, 6.5)
+shape = SubResource("RectangleShape2D_ruvm8")
+disabled = true
