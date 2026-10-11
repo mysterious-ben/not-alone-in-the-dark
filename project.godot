@@ -13,7 +13,6 @@ config_version=5
 config/name="Not Alone In The Dark"
 run/main_scene="uid://u5pv4x2nvnjh"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-run/max_fps=120
 config/icon="res://icon.svg"
 
 [display]
@@ -21,8 +20,9 @@ config/icon="res://icon.svg"
 window/size/viewport_width=320
 window/size/viewport_height=180
 window/size/mode=2
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 
 [input]
 
@@ -75,6 +75,7 @@ look_right={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 
@@ -82,3 +83,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
