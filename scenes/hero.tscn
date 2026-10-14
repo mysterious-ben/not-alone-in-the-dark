@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://tk2rrpxha4t1" path="res://assets/sprites/hero.png" id="1_3uyx6"]
 [ext_resource type="Script" uid="uid://brdchafxtp36" path="res://scripts/hero.gd" id="1_yvbpl"]
+[ext_resource type="PackedScene" uid="uid://dlqwof4c552x2" path="res://scenes/flashlight.tscn" id="3_06baw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d6xj2"]
-size = Vector2(3, 14)
+size = Vector2(3.5, 14)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n5qna"]
 atlas = ExtResource("1_3uyx6")
@@ -111,11 +112,16 @@ animations = [{
 script = ExtResource("1_yvbpl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2083197558]
-position = Vector2(-0.5, 1)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d6xj2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1331173723]
-position = Vector2(-1, 0)
 sprite_frames = SubResource("SpriteFrames_ruvm8")
 animation = &"idle_flashlight"
 autoplay = "idle_flashlight"
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=2079415720]
+current = true
+
+[node name="Flashlight" parent="." unique_id=1839288511 instance=ExtResource("3_06baw")]
+position = Vector2(3, 1)

@@ -63,12 +63,33 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8b7g8"]
 size = Vector2(5, 13)
 
+[sub_resource type="Gradient" id="Gradient_24oxn"]
+offsets = PackedFloat32Array(0.036144577, 0.70481926)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ruvm8"]
+gradient = SubResource("Gradient_24oxn")
+fill = 1
+fill_from = Vector2(0.51304346, 0.5)
+
 [node name="Light" type="AnimatableBody2D" unique_id=1552714285]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1766148435]
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ruvm8")
 animation = &"lit"
+autoplay = "lit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=379173938]
 position = Vector2(-0.5, 1.5)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_8b7g8")
+disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1579212562]
+position = Vector2(-1, -2)
+color = Color(0.95, 0.88239163, 0.37049997, 1)
+shadow_enabled = true
+shadow_filter_smooth = 5.0
+texture = SubResource("GradientTexture2D_ruvm8")
+texture_scale = 4.0

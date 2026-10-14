@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dlqwof4c552x2"]
+
+[ext_resource type="Texture2D" uid="uid://gb12qlyd2iwc" path="res://assets/sprites/flashlight2_harsh.png" id="1_lkaa1"]
+
+[sub_resource type="Gradient" id="Gradient_yvbpl"]
+offsets = PackedFloat32Array(0, 0.72289157)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ruvm8"]
+gradient = SubResource("Gradient_yvbpl")
+width = 8
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Flashlight" type="Node2D" unique_id=1839288511]
+
+[node name="FaceLight" type="PointLight2D" parent="." unique_id=2137826307]
+position = Vector2(-2, 0)
+energy = 0.2
+texture = SubResource("GradientTexture2D_ruvm8")
+
+[node name="MainLight" type="PointLight2D" parent="." unique_id=142984518]
+shadow_enabled = true
+texture = ExtResource("1_lkaa1")
+offset = Vector2(115, 0)
+texture_scale = 0.3

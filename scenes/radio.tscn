@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://jeydxaeeb84h"]
 
 [ext_resource type="Texture2D" uid="uid://ee6g58cxldw0" path="res://assets/sprites/radio_v2.png" id="1_y83x7"]
+[ext_resource type="AudioStream" uid="uid://d00g83sb43y2x" path="res://assets/audio/sfx/noise.ogg" id="2_ldjbc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldjbc"]
 atlas = ExtResource("1_y83x7")
@@ -36,17 +37,42 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ruvm8"]
-size = Vector2(5, 3)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xp8tn"]
+size = Vector2(5.25, 3.25)
+
+[sub_resource type="Gradient" id="Gradient_y83x7"]
+offsets = PackedFloat32Array(0.009036144, 0.560241)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ruvm8"]
+gradient = SubResource("Gradient_y83x7")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.51086956, 0.5021739)
 
 [node name="Radio" type="AnimatableBody2D" unique_id=1064159528]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=99641837]
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_ruvm8")
 animation = &"on"
-autoplay = "off"
+autoplay = "on"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=151651963]
-position = Vector2(0.5, 6.5)
-shape = SubResource("RectangleShape2D_ruvm8")
+shape = SubResource("RectangleShape2D_xp8tn")
 disabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1215871364]
+scale = Vector2(1, 0.96875)
+color = Color(0.87927467, 0.75339365, 0.5310905, 1)
+energy = 0.4
+texture = SubResource("GradientTexture2D_ruvm8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=27419616]
+stream = ExtResource("2_ldjbc")
+volume_db = -10.0
+autoplay = true
+max_distance = 250.0
+bus = &"SFX"
+parameters/looping = true

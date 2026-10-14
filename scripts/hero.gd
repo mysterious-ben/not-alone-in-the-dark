@@ -7,6 +7,8 @@ class_name Hero extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var flashlight: Node2D = $Flashlight
+@onready var flashlight_position: Vector2 = flashlight.position
 
 var is_dead: bool = false
 var look_vector: Vector2 = Vector2(1.0, 0)
@@ -52,6 +54,11 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 	else:
 		sprite.flip_h = true
+	var flashlight_rotation: float = 0.0 if look_direction > 0 else PI
+	if flashlight.rotation != flashlight_rotation:
+		flashlight.rotation = flashlight_rotation
+		# keep the light source on the lens: mirror around the sprite's center like flip_h does
+		flashlight.position.x = sprite.position.x + (flashlight_position.x - sprite.position.x) * look_direction
 
 	var move_direction: float = Input.get_axis("move_left", "move_right")
 
