@@ -35,3 +35,6 @@ mono_crash.*.json
 ._*
 Thumbs.db
 desktop.ini
+
+# Claude
+CLAUDE.md

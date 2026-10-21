@@ -38,7 +38,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xp8tn"]
-size = Vector2(5.25, 3.25)
+size = Vector2(4, 2)
 
 [sub_resource type="Gradient" id="Gradient_y83x7"]
 offsets = PackedFloat32Array(0.009036144, 0.560241)

@@ -15,13 +15,30 @@ fill_from = Vector2(0.5, 0.5)
 
 [node name="Flashlight" type="Node2D" unique_id=1839288511]
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=713282136]
+visible = false
+offset_left = -51.0
+offset_top = -73.0
+offset_right = 251.0
+offset_bottom = 73.0
+color = Color(0.46, 0.46, 0.46, 0.5411765)
+
 [node name="FaceLight" type="PointLight2D" parent="." unique_id=2137826307]
 position = Vector2(-2, 0)
 energy = 0.2
 texture = SubResource("GradientTexture2D_ruvm8")
 
 [node name="MainLight" type="PointLight2D" parent="." unique_id=142984518]
+energy = 0.5
 shadow_enabled = true
+texture = ExtResource("1_lkaa1")
+offset = Vector2(115, 0)
+texture_scale = 0.3
+
+[node name="MainLight2" type="PointLight2D" parent="." unique_id=290514480]
+energy = 0.5
+shadow_enabled = true
+shadow_item_cull_mask = 3
 texture = ExtResource("1_lkaa1")
 offset = Vector2(115, 0)
 texture_scale = 0.3

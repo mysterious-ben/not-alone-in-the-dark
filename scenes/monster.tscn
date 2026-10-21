@@ -50,20 +50,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwnm8"]
-size = Vector2(13, 15)
-
 [node name="Monster" type="CharacterBody2D" unique_id=1150376026]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=241283398]
+polygon = PackedVector2Array(-14, -14, -14, 16, 14, 16, 14, -14)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1173895803]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0035k")
 autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=541304647]
-position = Vector2(0, 1)
-scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_uwnm8")
+frame_progress = 0.077711456
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1902483084]
 stream = ExtResource("2_1cbnp")
