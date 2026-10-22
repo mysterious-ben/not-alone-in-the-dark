@@ -14,9 +14,9 @@ var is_dead: bool = false
 var look_vector: Vector2 = Vector2(1.0, 0)
 var look_direction: float = 1.0
 # The body moves by fractions of a pixel. Sprites snap to the pixel grid, lights don't, so the
-# flashlight drifted against the world and flickered. Visual children are drawn at a whole-pixel
-# offset from the body instead, interpolating between physics ticks by hand (built-in physics
-# interpolation is off for the hero in hero.tscn, so the camera under it runs in idle mode too).
+# flashlight drifted against the world and flickered. Visual children are drawn at whole-pixel
+# positions instead: they're top-level, opt out of built-in physics interpolation and follow the
+# body's position interpolated by hand.
 var previous_position: Vector2
 var visual_positions: Dictionary[Node2D, Vector2] = {}
 signal died
@@ -37,7 +37,10 @@ func _ready() -> void:
 	previous_position = global_position
 	for child: Node in get_children():
 		if child is Node2D and not (child is CollisionPolygon2D or child is CollisionShape2D):
-			visual_positions[child as Node2D] = child.position
+			var node: Node2D = child
+			visual_positions[node] = node.position
+			node.top_level = true
+			node.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	sprite.sprite_frames.set_animation_speed("walk", walk_animation_speed)
 	sprite.sprite_frames.set_animation_speed("walk_flashlight", walk_animation_speed)
 
@@ -45,9 +48,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var fraction: float = Engine.get_physics_interpolation_fraction()
 	var visual_position: Vector2 = previous_position.lerp(global_position, fraction).round()
-	var offset: Vector2 = visual_position - global_position
 	for node: Node2D in visual_positions:
-		node.position = visual_positions[node] + offset
+		node.global_position = visual_position + visual_positions[node]
 
 
 func _physics_process(delta: float) -> void:
