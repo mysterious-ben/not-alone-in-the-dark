@@ -122,3 +122,8 @@ current = true
 
 [node name="Flashlight" parent="." unique_id=1839288511 instance=ExtResource("3_06baw")]
 position = Vector2(3, 1)
+
+[node name="ActionFinder" type="Area2D" parent="." unique_id=1618792857]
+
+[node name="ActionFinderPolygon2D" type="CollisionPolygon2D" parent="ActionFinder" unique_id=746964299]
+polygon = PackedVector2Array(-1, -6, 9, -6, 9, 8, -1, 8)

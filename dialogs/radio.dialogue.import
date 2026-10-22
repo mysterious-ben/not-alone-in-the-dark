@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dhlug7q7apwm0"
+path="res://.godot/imported/radio.dialogue-7c352a8d8ba75651489fffc3bebd4970.tres"
+
+[deps]
+
+source_file="res://dialogs/radio.dialogue"
+dest_files=["res://.godot/imported/radio.dialogue-7c352a8d8ba75651489fffc3bebd4970.tres"]
+
+[params]
+
+defaults=true
