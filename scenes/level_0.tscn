@@ -5,10 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://jeydxaeeb84h" path="res://scenes/radio.tscn" id="1_uijja"]
 [ext_resource type="Texture2D" uid="uid://jgt3cjmb7khl" path="res://assets/sprites/dark_terrain_v2.png" id="3_rerym"]
 [ext_resource type="Texture2D" uid="uid://qno3jfvdaol2" path="res://assets/sprites/glass.png" id="3_uijja"]
+[ext_resource type="Resource" uid="uid://dhlug7q7apwm0" path="res://dialogs/radio.dialogue" id="6_ll25s"]
 [ext_resource type="PackedScene" uid="uid://cuwr7euxksvuh" path="res://scenes/monster.tscn" id="6_rhhhf"]
-[ext_resource type="Script" uid="uid://cqcur1rm7433g" path="res://addons/dialogue_manager/nodes/actionable/dialogue_actionable_2d.gd" id="6_sk60w"]
 [ext_resource type="PackedScene" uid="uid://sra47klev5vu" path="res://scenes/light.tscn" id="6_xp8tn"]
-[ext_resource type="Resource" uid="uid://dhlug7q7apwm0" path="res://dialogs/radio.dialogue" id="7_om4r1"]
 [ext_resource type="PackedScene" uid="uid://bc0vdnk76c67i" path="res://scenes/eye.tscn" id="8_qjcqe"]
 [ext_resource type="AudioStream" uid="uid://de6fkkcwb7hh0" path="res://assets/audio/music/it_is_looking_ost.ogg" id="9_jv3i5"]
 
@@ -124,15 +123,8 @@ tile_set = SubResource("TileSet_ruvm8")
 
 [node name="Radio" parent="." unique_id=1064159528 instance=ExtResource("1_uijja")]
 position = Vector2(-32, 46)
-
-[node name="DialogueActionable2D" type="Area2D" parent="Radio" unique_id=1260068438]
-script = ExtResource("6_sk60w")
-dialogue_resource = ExtResource("7_om4r1")
+dialogue_resource = ExtResource("6_ll25s")
 dialogue_cue = "start"
-metadata/_custom_type_script = "uid://cqcur1rm7433g"
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Radio/DialogueActionable2D" unique_id=2136564186]
-polygon = PackedVector2Array(-6, -12, -6, 2, 6, 2, 6, -12)
 
 [node name="Monster" parent="." unique_id=1150376026 instance=ExtResource("6_rhhhf")]
 position = Vector2(352, -48)
