@@ -3,6 +3,7 @@ class_name Hero extends CharacterBody2D
 @export var move_speed: float = 40.0
 @export var back_speed: float = 20.0
 @export var walk_animation_speed: float = 3.0
+@export var turn_delay: float = 0.15
 @export var flashlight_on: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -13,12 +14,13 @@ class_name Hero extends CharacterBody2D
 var is_dead: bool = false
 var look_vector: Vector2 = Vector2(1.0, 0)
 var look_direction: float = 1.0
+var turn_timer: float = 0.0
 # The body moves by fractions of a pixel. Sprites snap to the pixel grid, lights don't, so the
 # flashlight drifted against the world and flickered. Visual children are drawn at whole-pixel
 # positions instead: they're top-level, opt out of built-in physics interpolation and follow the
 # body's position interpolated by hand.
 var previous_position: Vector2
-var visual_positions: Dictionary[Node2D, Vector2] = {}
+var visual_positions: Dictionary[Node2D, Vector2] = { }
 signal died
 
 
@@ -59,16 +61,20 @@ func _physics_process(delta: float) -> void:
 
 	# if Input.is_action_just_pressed()
 	var look_vector_upd: Vector2 = Input.get_vector(
-		"look_left",
-		"look_right",
-		"look_down",
-		"look_up",
+		# "look_left",
+		# "look_right",
+		# "look_down",
+		# "look_up",
+		"move_left",
+		"move_right",
+		"move_down",
+		"move_up",
 	)
 	if abs(look_vector_upd.x) > 0:
-		if look_vector_upd.x > 0:
-			look_direction = 1.0
-		elif look_vector_upd.x < 0:
-			look_direction = -1.0
+		var new_look_direction: float = signf(look_vector_upd.x)
+		if new_look_direction != look_direction:
+			turn_timer = turn_delay
+		look_direction = new_look_direction
 		look_vector = look_vector_upd
 
 	if look_direction > 0:
@@ -87,7 +93,9 @@ func _physics_process(delta: float) -> void:
 	var move_direction: float = Input.get_axis("move_left", "move_right")
 
 	var speed: float = 0.0
-	if abs(move_direction) > 0:
+	if turn_timer > 0.0:
+		turn_timer -= delta
+	elif abs(move_direction) > 0:
 		if (
 			((move_direction > 0) and (look_direction > 0))
 			or ((move_direction < 0) and (look_direction < 0))
