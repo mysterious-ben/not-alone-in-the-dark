@@ -106,7 +106,6 @@ animations = [{
 }]
 
 [node name="Hero" type="CharacterBody2D" unique_id=1137355183]
-physics_interpolation_mode = 2
 script = ExtResource("1_yvbpl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1401290943]
