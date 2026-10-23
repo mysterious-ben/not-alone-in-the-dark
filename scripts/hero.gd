@@ -4,7 +4,6 @@ class_name Hero extends CharacterBody2D
 @export var back_speed: float = 20.0
 @export var walk_animation_speed: float = 3.0
 @export var turn_delay: float = 0.15
-@export var flashlight_on: bool = false
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flashlight: Node2D = $Flashlight
@@ -49,6 +48,12 @@ func _ready() -> void:
 			node.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
 	sprite.sprite_frames.set_animation_speed("walk", walk_animation_speed)
 	sprite.sprite_frames.set_animation_speed("walk_flashlight", walk_animation_speed)
+	flashlight.visible = GameState.flashlight_on
+
+
+func toggle_flashlight() -> void:
+	GameState.flashlight_on = not GameState.flashlight_on
+	flashlight.visible = GameState.flashlight_on
 
 
 func _process(_delta: float) -> void:
@@ -61,19 +66,28 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if is_dead or is_in_dialogue:
 		return
-	if event.is_action_pressed("activate"):
-		var nearest: DialogueActionable2D = null
+	if event.is_action_pressed("light"):
+		get_viewport().set_input_as_handled()
+		toggle_flashlight()
+	elif event.is_action_pressed("activate"):
+		var nearest_dialogue: DialogueActionable2D = null
 		var nearest_distance: float = INF
 		for area: Area2D in action_finder.get_overlapping_areas():
-			var distance: float = area.global_position.distance_squared_to(global_position)
-			if area is DialogueActionable2D and distance < nearest_distance:
+			if not area is DialogueActionable2D:
+				continue
+			var actionable: DialogueActionable2D = area
+			# action() does nothing without dialogue, so dialogue_ended would never free the hero
+			if actionable.dialogue_resource == null or actionable.dialogue_cue.is_empty():
+				continue
+			var distance: float = actionable.global_position.distance_squared_to(global_position)
+			if distance < nearest_distance:
 				nearest_distance = distance
-				nearest = area
-		if nearest:
+				nearest_dialogue = actionable
+		if nearest_dialogue:
 			get_viewport().set_input_as_handled()
-			nearest.dialogue_ended.connect(_on_dialogue_ended, CONNECT_ONE_SHOT)
+			nearest_dialogue.dialogue_ended.connect(_on_dialogue_ended, CONNECT_ONE_SHOT)
 			is_in_dialogue = true
-			nearest.action()
+			nearest_dialogue.action()
 			# the whole game freezes while talking; only the balloon keeps running
 			# nearest.dialogue_balloon.process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -134,12 +148,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			speed = back_speed * move_direction
 
+	var animation_suffix: String = "_flashlight" if GameState.flashlight_on else ""
 	sprite.speed_scale = 1.0
 	if abs(speed) > 0:
-		sprite.play("walk_flashlight")
+		sprite.play("walk" + animation_suffix)
 		sprite.speed_scale = abs(speed) / move_speed
 	else:
-		sprite.play("idle_flashlight")
+		sprite.play("idle" + animation_suffix)
 
 	velocity.x = speed
 

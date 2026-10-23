@@ -1,9 +1,9 @@
 ~ start
-Eduardo: [[Oh|Wow]], here is a radio.
+Clark: [[Oh|Wow]], here is a radio.
 - Turn on
 	do turn_on()
-	Eduardo: Noise.
+	Clark: It's just noise.
 - Turn off
 	do turn_off()
-	Eduardo: Silence.
+	Clark: Quiet. Finally.
 => END

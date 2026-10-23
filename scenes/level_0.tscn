@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://sra47klev5vu" path="res://scenes/light.tscn" id="6_xp8tn"]
 [ext_resource type="PackedScene" uid="uid://bc0vdnk76c67i" path="res://scenes/eye.tscn" id="8_qjcqe"]
 [ext_resource type="AudioStream" uid="uid://de6fkkcwb7hh0" path="res://assets/audio/music/it_is_looking_ost.ogg" id="9_jv3i5"]
+[ext_resource type="Resource" uid="uid://dqq6veot0e5ae" path="res://dialogs/light.dialogue" id="9_sk60w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xp8tn"]
 texture = ExtResource("1_5nv5w")
@@ -134,6 +135,8 @@ position = Vector2(62, 32)
 
 [node name="Light" parent="Lights" unique_id=1552714285 instance=ExtResource("6_xp8tn")]
 position = Vector2(-24, 0)
+dialogue_resource = ExtResource("9_sk60w")
+dialogue_cue = "start"
 
 [node name="Light2" parent="Lights" unique_id=2100613975 instance=ExtResource("6_xp8tn")]
 position = Vector2(177, 3)

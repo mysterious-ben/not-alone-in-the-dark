@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dqq6veot0e5ae"
+path="res://.godot/imported/light.dialogue-81ceb8c1c967bdef0f368dac3a8e3ba0.tres"
+
+[deps]
+
+source_file="res://dialogs/light.dialogue"
+dest_files=["res://.godot/imported/light.dialogue-81ceb8c1c967bdef0f368dac3a8e3ba0.tres"]
+
+[params]
+
+defaults=true

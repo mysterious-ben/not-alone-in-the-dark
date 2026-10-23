@@ -1,0 +1,7 @@
+~ start
+Clark: Oh, look at that...[wait=0.8] A street light.
+if GameState.flashlight_on
+	Clark: I have a flashlight though.
+else
+	Clark: The only thing shining here.
+=> END

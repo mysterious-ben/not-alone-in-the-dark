@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://sra47klev5vu"]
 
 [ext_resource type="Texture2D" uid="uid://clvp1lb1c1m" path="res://assets/sprites/light.png" id="1_24oxn"]
+[ext_resource type="Script" uid="uid://bxi7b0obpdoh1" path="res://scripts/light.gd" id="1_ky1i4"]
+[ext_resource type="Script" uid="uid://cqcur1rm7433g" path="res://addons/dialogue_manager/nodes/actionable/dialogue_actionable_2d.gd" id="2_2e2gu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2e2gu"]
 atlas = ExtResource("1_24oxn")
@@ -72,7 +74,9 @@ gradient = SubResource("Gradient_24oxn")
 fill = 1
 fill_from = Vector2(0.51304346, 0.5)
 
-[node name="Light" type="AnimatableBody2D" unique_id=1552714285]
+[node name="Light" type="AnimatableBody2D" unique_id=1552714285 node_paths=PackedStringArray("dialogue_actionable_2d")]
+script = ExtResource("1_ky1i4")
+dialogue_actionable_2d = NodePath("DialogueActionable2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1766148435]
 scale = Vector2(2, 2)
@@ -87,9 +91,15 @@ shape = SubResource("RectangleShape2D_8b7g8")
 disabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1579212562]
-position = Vector2(-1, -2)
 color = Color(0.95, 0.88239163, 0.37049997, 1)
 shadow_enabled = true
 shadow_filter_smooth = 5.0
 texture = SubResource("GradientTexture2D_ruvm8")
 texture_scale = 4.0
+
+[node name="DialogueActionable2D" type="Area2D" parent="." unique_id=1379487839]
+script = ExtResource("2_2e2gu")
+metadata/_custom_type_script = "uid://cqcur1rm7433g"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DialogueActionable2D" unique_id=1617434223]
+polygon = PackedVector2Array(-8, -8, -8, 16, 8, 16, 8, -8)
